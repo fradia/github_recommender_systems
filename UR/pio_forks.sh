@@ -4,7 +4,7 @@ if [ ! -f examples/forks-engine-simple.json ]; then
     exit 1
 fi
 
-if [ ! -f data/f_sample.csv ]; then
+if [ ! -f data/forks_sample.csv ]; then
     echo "File not found: data/forks_sample_prepared_train.csv"
     exit 1
 fi
