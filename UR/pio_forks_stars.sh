@@ -4,8 +4,8 @@ if [ ! -f examples/forks-stars-engine.json ]; then
     exit 1
 fi
 
-if [ ! -f data/forks_stars_sample_prepared_train.csv ]; then
-    echo "File not found: data/forks_stars_sample_prepared_train.csv"
+if [ ! -f data/forks_stars_sample_train.csv ]; then
+    echo "File not found: data/forks_stars_sample_train.csv"
     exit 1
 fi
 
@@ -20,7 +20,7 @@ pio status
 pio app new forksstars || true
 
 echo ""
-echo "Checking to see if handmade app exists, should exit if not."
+echo "Checking to see if forksstars app exists, should exit if not."
 pio app show forksstars
 
 echo ""
@@ -28,20 +28,16 @@ echo "Moving engine.json to user-engine.json if it exists"
 cp -n engine.json user-engine.json || true
 
 echo ""
-echo "Moving examples/handmade-engine.json to engine.json for integration test."
+echo "Moving examples/forks-stars-engine.json to engine.json."
 cp examples/forks-stars-engine.json engine.json
 
 echo ""
-echo "Deleting handmade app data since the test is date dependent"
-pio app data-delete forksstars -f
-
-echo ""
-echo "Importing data for integration test"
+echo "Importing data"
 # get the access_key from pio app list
 ACCESS_KEY=`pio app show forksstars | grep Key | cut -f 7 -d ' '`
 echo -n "Access key: "
 echo $ACCESS_KEY
-python import_data.py --access_key $ACCESS_KEY --file data/fs_sample.csv
+python import_data.py --access_key $ACCESS_KEY --file data/forks_stars_sample.csv
 
 echo ""
 echo "Building and delpoying model"
