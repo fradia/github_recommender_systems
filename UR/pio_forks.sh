@@ -4,8 +4,8 @@ if [ ! -f examples/forks-engine-simple.json ]; then
     exit 1
 fi
 
-if [ ! -f data/forks_sample.csv ]; then
-    echo "File not found: data/forks_sample_prepared_train.csv"
+if [ ! -f data/forks_sample_train.csv ]; then
+    echo "File not found: data/forks_sample_train.csv"
     exit 1
 fi
 
@@ -28,20 +28,16 @@ echo "Moving engine.json to user-engine.json if it exists"
 cp -n engine.json user-engine.json || true
 
 echo ""
-echo "Moving engines/forks-engine-simple.json to engine.json for integration test."
+echo "Moving engines/forks-engine-simple.json to engine.json."
 cp examples/forks-engine-simple.json engine.json
 
 echo ""
-echo "Deleting handmade app data since the test is date dependent"
-pio app data-delete forks -f
-
-echo ""
-echo "Importing data for integration test"
+echo "Importing data"
 # get the access_key from pio app list
 ACCESS_KEY=`pio app show forks | grep Key | cut -f 7 -d ' '`
 echo -n "Access key: "
 echo $ACCESS_KEY
-python import_data.py --access_key $ACCESS_KEY --file data/forks_sample.csv
+python import_data.py --access_key $ACCESS_KEY --file data/forks_sample_train.csv
 
 echo ""
 echo "Building and delpoying model"
