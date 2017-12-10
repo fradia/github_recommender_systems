@@ -1,0 +1,1 @@
+SELECT * FROM [ghtorrent-bq:ght_2017_09_01.users] 
