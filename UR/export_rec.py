@@ -27,8 +27,8 @@ def export_predictions(file_i, file_o):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(
     description="Export recommendations")
-  parser.add_argument('--file_i', default="./data/forks_sample_prepared_train.csv")
-  parser.add_argument('--file_o',default="./data/forks_sample_ur_predictions_train.json")
+  parser.add_argument('--file_i', default="./data/forks_stars_sample_train.csv")
+  parser.add_argument('--file_o',default="./data/forks_stars_sample_ur_predictions_train.json")
   
   args = parser.parse_args()
   export_predictions(args.file_i,args.file_o)
