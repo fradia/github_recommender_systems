@@ -37,7 +37,7 @@ echo "Importing data"
 ACCESS_KEY=`pio app show forksstars | grep Key | cut -f 7 -d ' '`
 echo -n "Access key: "
 echo $ACCESS_KEY
-python import_data.py --access_key $ACCESS_KEY --file data/forks_stars_sample.csv
+python import_data.py --access_key $ACCESS_KEY --file data/forks_stars_sample_train.csv
 
 echo ""
 echo "Building and delpoying model"
